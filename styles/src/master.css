@@ -19,3 +19,10 @@ p#feedback {
 p#feedback.show {
   visibility: visible;
 }
+
+video.camera {
+  border-radius: 1rem;
+  background: var(--surface-1);
+  width: 40rem;
+  height: 30rem;
+}

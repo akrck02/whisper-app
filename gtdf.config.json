@@ -1,0 +1,28 @@
+{
+  "base": {
+    "app_name": "skyleriearts",
+    "app_version": "v2.0.0",
+    "enviroment": "development",
+    "author": "akrck02"
+  },
+  "path": {
+    "url": "./",
+    "resources": "resources",
+    "language": "resources/i18n",
+    "images": "resources/images",
+    "icons": "resources/icons",
+    "data": "resources/data"
+  },
+  "views": {
+    "url": "/#",
+    "home": "home",
+    "error": "error",
+    "blank": "blank"
+  },
+  "api": {},
+  "variables": {
+    "animations": "true",
+    "language": "en",
+    "theme": "light"
+  }
+}

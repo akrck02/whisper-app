@@ -14,18 +14,20 @@
       background: #1a1a1a;
     }
   </style>
-  <body>
-    <div>
-      <h1>Whisper</h1>
+  <body class="box-column">
+    <video autoplay class="camera" />
+    <p id="feedback">...</p>
+    <div class="toolbar">
       <button id="call-button">
         <img src="/resources/icons/call.svg" />
+      </button>
+      <button id="camera-button" class="off">
+        <img src="/resources/icons/videocam.svg" />
       </button>
       <button id="mic-button" class="muted">
         <img src="/resources/icons/mic_off.svg" />
       </button>
-
-      <p id="feedback">...</p>
     </div>
   </body>
-  <script type="module" src="./src/app.js"></script>
+  <script type="module" src="./temp/src/start.js"></script>
 </html>
