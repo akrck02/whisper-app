@@ -1,0 +1,21 @@
+@import url("./bubble.css");
+
+button#mic-button.muted {
+  background: var(--error-color);
+}
+
+button#call-button.connected {
+  background: var(--error-color);
+}
+
+p#feedback {
+  background: var(--surface-1);
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  visibility: hidden;
+}
+
+p#feedback.show {
+  visibility: visible;
+}
