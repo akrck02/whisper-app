@@ -3,8 +3,21 @@ import { getConfiguration } from "../../lib/configuration.js";
 import { uiComponent } from "../../lib/dom.js";
 import { Html } from "../../lib/html.js";
 import { httpGet } from "../../lib/http.js";
-import { toggleCamera } from "../../services/camera.js";
+import {
+  AUDIO_INPUT_DEVICES,
+  loadUserMedia,
+  toggleCamera,
+  VIDEO_INPUT_DEVICES
+} from "../../services/media.js";
 
+let connected = false;
+let muted = true;
+
+/**
+ * Show Video call view
+ * @param parameters The parameters to use
+ * @param container The container to attach the view to
+ */
 export async function showVideoCallView(
   parameters: string[],
   container: HTMLElement
@@ -28,8 +41,65 @@ export async function showVideoCallView(
   video.muted = true;
   view.appendChild(video);
 
+  const deviceSelection = uiComponent({
+    classes: [BubbleUI.BoxRow],
+    styles: {
+      margin: "1rem 0"
+    }
+  });
+  view.appendChild(deviceSelection);
+
+  const audioDevices = uiComponent({
+    type: Html.Select,
+    classes: ["audio-selection"],
+    styles: {
+      marginRight: "1rem"
+    }
+  });
+  deviceSelection.appendChild(audioDevices);
+
+  const videoDevices = uiComponent({
+    type: Html.Select,
+    classes: ["video-selection"]
+  });
+  deviceSelection.appendChild(videoDevices);
+
   const toolbar = createToolbar();
   view.appendChild(toolbar);
+  container.appendChild(view);
+
+  await loadUserMedia();
+  AUDIO_INPUT_DEVICES.forEach((device) => {
+    const deviceOption = uiComponent({
+      type: Html.Option,
+      text: device.label
+    });
+
+    console.table(device);
+    audioDevices.appendChild(deviceOption);
+  });
+
+  VIDEO_INPUT_DEVICES.forEach((device) => {
+    const deviceOption = uiComponent({
+      type: Html.Option,
+      text: device.label
+    });
+
+    console.table(device);
+    videoDevices.appendChild(deviceOption);
+  });
+}
+
+/**
+ * Create the toolbar
+ * @returns the HTML element
+ */
+function createToolbar(): HTMLElement {
+  const toolbar = uiComponent({
+    styles: {
+      marginTop: "1rem"
+    }
+  });
 
   const callButton = iconButton(
     "call-button",
@@ -54,20 +124,17 @@ export async function showVideoCallView(
     mute
   );
   toolbar.appendChild(micButton);
-
-  container.appendChild(view);
-}
-
-function createToolbar(): HTMLElement {
-  const toolbar = uiComponent({
-    styles: {
-      marginTop: "2rem"
-    }
-  });
-
   return toolbar;
 }
 
+/**
+ * Create an icon button
+ * @param id The button id
+ * @param classes The classes to add to the button
+ * @param icon The icon to be set
+ * @param callback The callback to execute on click
+ * @returns The HTML element
+ */
 function iconButton(
   id: string,
   classes: string[],
@@ -92,7 +159,9 @@ function iconButton(
   return button;
 }
 
-let connected = false;
+/**
+ * Connect / Disconnect of the voice channel
+ */
 function call() {
   connected = !connected;
   const img = document.querySelector("#call-button img") as HTMLImageElement;
@@ -101,7 +170,9 @@ function call() {
   document.getElementById("call-button").classList.toggle("connected");
 }
 
-let muted = true;
+/**
+ * Mute / Unmute the microphone
+ */
 function mute() {
   muted = !muted;
   const img = document.querySelector("#mic-button img") as HTMLImageElement;
