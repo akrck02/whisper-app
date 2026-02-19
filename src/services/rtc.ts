@@ -41,6 +41,7 @@ function listenOffers(peerConnection: RTCPeerConnection) {
 
   signaling.onmessage = (event) => {
     const message = JSON.parse(event.data);
+    console.log(message);
     if (message.offer) {
       peerConnection.setRemoteDescription(
         new RTCSessionDescription(message.offer)
