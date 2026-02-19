@@ -1,14 +1,16 @@
+import { startRtc } from "./rtc.js";
+
 // Permissions
 export let hasPermission = false;
 
 // Microphone settings
 let hasMic = false;
-let openMic = undefined;
+let openMic: string;
 
 // Camera settings
 let hasCamera = false;
 let cameraOn = false;
-let openCamera = undefined;
+let openCamera: string;
 
 // Devices
 export const VIDEO_INPUT_DEVICES: MediaDeviceInfo[] = [];
@@ -79,6 +81,7 @@ export async function loadUserMedia() {
     }
 
     videoElement.srcObject = stream;
+    startRtc();
   }
 }
 
@@ -97,11 +100,10 @@ export function startVideo(
  */
 export function stopVideo() {
   const videoElement = document.querySelector("video") as HTMLVideoElement;
-  const videoStream = videoElement.srcObject as MediaStream;
-  videoStream?.getTracks().forEach((track) => track.stop());
+  const stream = videoElement.srcObject as MediaStream;
+  const tracks = stream.getTracks();
+  tracks?.forEach((track) => track.stop());
   videoElement.srcObject = null;
-  videoElement.pause();
-  videoElement.currentTime = 0;
 }
 
 /**
