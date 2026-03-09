@@ -1,9 +1,13 @@
-import { getConfiguration, loadConfiguration } from "./lib/configuration.js";
-import { Display } from "./lib/display.js";
-import { loadIcons } from "./lib/icons.js";
-import { setNotFoundRoute, setRoute, showRoute } from "./lib/router.js";
+import {
+  getConfiguration,
+  loadConfiguration
+} from "./models/lib/configuration.js";
+import { Display } from "./models/lib/display.js";
+import { loadIcons } from "./models/lib/icons.js";
+import { setNotFoundRoute, setRoute, showRoute } from "./models/lib/router.js";
 import { showErrorView } from "./views/error.js";
-import { showVideoCallView } from "./views/videocall/videocall.js";
+import { showHomeView } from "./views/servers/home.js";
+import { showVideoCallView } from "./views/videocall.js";
 
 /**./views/home/summary.js
  * When the dynamic URL changes loads
@@ -30,7 +34,8 @@ window.onresize = async function () {
 
 /** Start the web app     */
 async function start() {
-  setRoute("", showVideoCallView);
+  setRoute("", showHomeView);
+  setRoute("/call", showVideoCallView);
 
   setNotFoundRoute(showErrorView);
   showRoute(window.location.hash.slice(1).toLowerCase(), document.body);

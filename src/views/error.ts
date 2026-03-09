@@ -1,18 +1,18 @@
-import { getErrorByCode } from '../errors/errors.js';
-import { getConfiguration } from '../lib/configuration.js';
-import { uiComponent } from '../lib/dom.js';
-import { Html } from '../lib/html.js';
+import { getErrorByCode } from "../errors/errors.js";
+import { getConfiguration } from "../models/lib/configuration.js";
+import { uiComponent } from "../models/lib/dom.js";
+import { Html } from "../models/lib/html.js";
 
 const DEFAULT_ERROR_CODE = 404;
-const ID = 'error';
-const IMAGE_ID = 'error-img';
-const TITLE_ID = 'error-title';
+const ID = "error";
+const IMAGE_ID = "error-img";
+const TITLE_ID = "error-title";
 
 export async function showErrorView(params: string[], container: HTMLElement) {
   const view = uiComponent({
-    type: 'view',
+    type: "view",
     id: ID,
-    classes: ['box-column', 'box-center']
+    classes: ["box-column", "box-center"]
   });
 
   const code = parseInt(params[0]);
@@ -28,7 +28,7 @@ export async function showErrorView(params: string[], container: HTMLElement) {
     type: Html.Img,
     id: IMAGE_ID,
     attributes: {
-      src: `${getConfiguration('path')['icons']}/error.svg`
+      src: `${getConfiguration("path")["icons"]}/error.svg`
     }
   });
   view.appendChild(image);

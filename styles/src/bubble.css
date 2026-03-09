@@ -1,12 +1,12 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap'); */
+@import url("./components/components.css");
+
 /*
 General variables of the framework
 */
 :root {
-  --font: "Open Sans", sans-serif;
-  --font-light: "Open Sans light", sans-serif;
-  --font-title: "Open Sans", sans-serif;
+  --font: system-ui, sans-serif;
+  --font-light: system-ui, sans-serif;
+  --font-title: system-ui, sans-serif;
   --font-console: "Ubuntu Mono", monospace;
   --animation-fast: 0.25s;
   --animation-medium: 0.5s;

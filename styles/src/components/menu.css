@@ -1,0 +1,23 @@
+#main-menu {
+  height: calc(100% - 1rem);
+  width: 5rem;
+  border-radius: 1.25rem;
+  margin: 0.5rem 0.5rem;
+}
+
+#main-menu .server-button {
+  width: 4rem;
+  height: 4rem;
+  padding: 0.1rem;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  color: rgba(255, 255, 255, 0.25);
+  border-radius: 3.25rem;
+
+  transition: border-radius var(--animation-medium);
+}
+
+#main-menu .server-button.selected {
+  background-color: var(--primary-color);
+  border-radius: 1rem;
+}

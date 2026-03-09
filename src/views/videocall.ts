@@ -1,14 +1,15 @@
-import { BubbleUI } from "../../lib/bubble.js";
-import { getConfiguration } from "../../lib/configuration.js";
-import { uiComponent } from "../../lib/dom.js";
-import { Html } from "../../lib/html.js";
-import { httpGet } from "../../lib/http.js";
+import { BubbleUI } from "../models/lib/bubble.js";
+import { getConfiguration } from "../models/lib/configuration.js";
+import { uiComponent } from "../models/lib/dom.js";
+import { Html } from "../models/lib/html.js";
+import { httpGet } from "../models/lib/http.js";
 import {
   AUDIO_INPUT_DEVICES,
   loadUserMedia,
   toggleCamera,
   VIDEO_INPUT_DEVICES
-} from "../../services/media.js";
+} from "../services/media.js";
+import RTC from "../services/rtc.js";
 
 let connected = false;
 let muted = true;
@@ -68,7 +69,8 @@ export async function showVideoCallView(
   view.appendChild(toolbar);
   container.appendChild(view);
 
-  await loadUserMedia();
+  //await loadUserMedia();
+  RTC.start();
   AUDIO_INPUT_DEVICES.forEach((device) => {
     const deviceOption = uiComponent({
       type: Html.Option,

@@ -1,4 +1,4 @@
-import { startRtc } from "./rtc.js";
+import RTC from "./rtc.js";
 
 // Permissions
 export let hasPermission = false;
@@ -81,7 +81,8 @@ export async function loadUserMedia() {
     }
 
     videoElement.srcObject = stream;
-    startRtc();
+    RTC.start();
+    RTC.addMediaToConnection(stream as MediaStream);
   }
 }
 
