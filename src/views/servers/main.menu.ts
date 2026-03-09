@@ -1,6 +1,7 @@
 import { BubbleUI } from "../../models/lib/bubble.js";
 import { uiComponent } from "../../models/lib/dom.js";
 import { Html } from "../../models/lib/html.js";
+import { Server } from "../../models/server.js";
 
 export default class MainMenu {
   private static readonly ID = "main-menu";

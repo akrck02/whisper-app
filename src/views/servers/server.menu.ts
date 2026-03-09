@@ -91,6 +91,9 @@ export default class ServerMenu {
             cursor: "pointer",
             padding: ".45rem .75rem",
             fontWeight: "lighter"
+          },
+          data: {
+            "channel.uuid": channel.uuid
           }
         });
 
